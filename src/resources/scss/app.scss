@@ -1,0 +1,8 @@
+@import 'variable';
+
+body {
+    background-color: rgb(233, 250, 255);
+}
+h1 {
+    color: $red-color;
+}

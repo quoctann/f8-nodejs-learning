@@ -1,0 +1,69 @@
+GHI CHÚ QUÁ TRÌNH HỌC
+
+PHẦN 1: BẮT ĐẦU
+
+Những dependencies nào bạn cảm thấy chỉ sử dụng cho dev thôi thì cài vào dev dependencies bằng cách:
+    npm i a_node_package --save-dev
+    Những package dev (khuyến nghị): morgan, nodemon
+
+Config file package.json bằng cách vào phần scripts, thêm key và câu lệnh, sau này khi muốn sử dụng chỉ cần gõ npm câu_lệnh_mà_bạn_đã_đặt là chạy được, ngắn gọn và đơn giản hơn
+    "scripts": {
+        "start": "nodemon index.js",
+    },
+
+Thư viện express > đọc docs, thư viện morgan > ghi log trong quá trình dev
+
+Node devtools: gõ node --inspect tên_file
+
+PHẦN 2: KIẾN THỨC CỐT LÕI
+
+Template engine: dùng để trả về một html template, có nhiều template engine nhưng ở đây sẽ sd express-handlebars, cài đặt:
+    npm install express-handlebars
+
+Xem thêm document
+- Khi res.render('tên tập tin handlebars') thì engine nó sẽ vào views/layouts tìm file main.handlebars để render layout, phần {{{body}}} nó sẽ tìm đến views tên tập tin vừa dùng ở trên để bỏ append vào {{{body}}} (tương tự jinja2), các đường dẫn, cấu trúc thư mục đều có thể config được (xem nội dung code, docs phần mở đầu)
+- Config lại handlebars (xem docs phần API)
+    app.engine('handlebars', handlebars({
+        /* config here */
+        extname: '.hbs',
+    }));
+    Như trên là config lại đuôi mở rộng của tất cả các file là .hbs thay vì .handlebars như mặc định > nhớ thay đổi tên các file trong views cho phù hợp, đổi luôn cả phần khai báo engine để không bị lỗi:
+    app.engine("hbs", handlebars({
+        extname: ".hbs",
+        })
+    );
+    app.set("view engine", "hbs");
+
+- Partial: render từng phần nhỏ là những tập tin rời rạc (như include trong jinja2):
+    {{> foo/bar}}
+    đường dẫn đến tập tin đó, mặc định nó sẽ vào thư mục partial để tìm
+
+STATIC FILE AND SCSS
+Static file: tại file index.js thêm dòng
+    app.use(express.static(path.join(__dirname, "/resources/public")))
+Để khi truy cập bằng url thì có thể truy cập được, vd: đường_dẫn/tên_file
+
+Tích hợp SCSS, cài đặt node-sass vào dev-dependencies
+    npm i node-sass --save-dev
+
+Tạo một thư mục để lưu file build trog public, tạo thư mục để viết scss và tự động build vào thư mục css, sử dụng cmd interface trong package.json
+    node-sass [options] <input> [output]
+    node-sass --watch src/resources/scss/app.scss src/resources/public/css
+    -w hoặc --watch sẽ theo dõi sự thay đổi và tự động build lại khi cần
+
+Các scripts viết trong package.json chạy bằng cách gõ trong terminal: npm run câu_lệnh
+
+Cấu hình nodemon để lắng nghe thay đổi cả các file scss (mặc định nó không có): tạo một file nodemon,json bên ngoài cùng project (ngang hàng với package.json), khai báo dạng object:
+    {
+        "ext": "js json"
+    }
+
+EXPRESS BASIC ROUTING (http://expressjs.com/)
+app.METHOD("/routing_here", function (req, res) {
+  /* Handler function here */
+}); để nhận một request, server xử lý và trả về một response
+app là một instance của express
+METHOD là phương thức HTTP viết lowercase
+
+QUERY PARAMETER: truyền data bằng phương thức get lấy data trên thanh url của trình duyệt
+domainname.com/someroute?your_key=value1&otherkey=value2
