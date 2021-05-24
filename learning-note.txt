@@ -13,7 +13,7 @@ Config file package.json bằng cách vào phần scripts, thêm key và câu l�
 
 Thư viện express > đọc docs, thư viện morgan > ghi log trong quá trình dev
 
-Node devtools: gõ node --inspect tên_file
+Node devtools: gõ node --inspect tên_file xong F12 mở chrome devtools rồi sử dụng
 
 PHẦN 2: KIẾN THỨC CỐT LÕI
 
@@ -67,3 +67,23 @@ METHOD là phương thức HTTP viết lowercase
 
 QUERY PARAMETER: truyền data bằng phương thức get lấy data trên thanh url của trình duyệt
 domainname.com/someroute?your_key=value1&otherkey=value2
+
+HTML FORM BEHAVIOUR
+Tạo một form với các ô input và submit, thì khi bấm submit hệ thống sẽ lấy value của tất cả các ô input có attribute name vào gắn lên URL và gửi request lên server bằng phương thức GET, dạng name: value (giống query parameter)
+Thẻ form có một attribute method="METHOD" mặc định nếu không khai báo thì sẽ là GET
+Khi bấm submit thì hệ thống sẽ gửi request ngay tại cái route hiện tại
+Khi reload page mà trước đó vừa gửi request theo method gì thì nó sẽ giữ method đó
+Thẻ form có một attribute là action mặc định là rỗng, giá trị của nó là URL sẽ handle request được gửi lên bởi form
+
+POST METHOD
+Gửi dưới dạng data form, không nằm trong url
+Lấy data từ phương thức post, sử dụng một middleware để lấy dữ liệu:
+    app.use(express.urlencoded());
+xong phía dưới mới sử dụng truy xuất được:
+    req.body
+    req.query được builtin sẵn (sd với get) nên không cần require thêm middleware
+middleware để parse request thành một object > dễ xử lý hơn.
+
+PHẦN 3: XÂY DỰNG WEBSITE (MÔ HÌNH MVC)
+Xem code comment. Luồng hoạt động:
+CLIENT REQUEST -> src/index.js -> src/routes/index.js -> src/routes/your_route.js -> src/app/controller/your_controller.js -> SERVER RESPONSE
