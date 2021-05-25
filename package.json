@@ -12,11 +12,6 @@
   "lint-staged": {
     "src/**/*.{js,json,scss}": "prettier --single-quote --trailing-comma all --tab-width 4 --write"
   },
-  "husky" : {
-    "hooks": {
-      "pre-commit": "npm lint-staged"
-    }
-  },
   "keywords": [
     "node",
     "nodejs",
@@ -29,7 +24,6 @@
     "express-handlebars": "^5.3.2"
   },
   "devDependencies": {
-    "husky": "^6.0.0",
     "lint-staged": "^11.0.0",
     "morgan": "^1.10.0",
     "node-sass": "^6.0.0",
