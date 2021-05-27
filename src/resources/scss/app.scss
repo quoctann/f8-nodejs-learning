@@ -1,8 +1,7 @@
-@import 'variable';
-
-body {
-    background-color: rgb(233, 250, 255);
+* {
+    font-family: 'Be Vietnam', Arial, Helvetica, sans-serif;
 }
-h1 {
-    color: $red-color;
+
+.text-justify {
+    text-align: justify;
 }

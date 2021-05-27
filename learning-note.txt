@@ -92,3 +92,8 @@ XEM THÊM: FORMAT CODE
 JS: một line code không nên dài quá 80 ký tự, tab indent thì nên để 4 space cho dễ nhìn hơn, khi thao tác với chuỗi thì nên dùng dấu '' để dễ nhìn hơn thay vì ""
 Prettier dùng để cấu hình format code theo một chuẩn chung nào đó, lint-staged khi kết hợp với Prettier sẽ cho phép chỉ format code khi file đang trong trạng thái staged, husky cho phép hooks lại khi commit hoặc khi push code lên git để thực hiện lệnh gì đó (vd ở đây là Prettier code lại)
 Xem thêm docs
+
+MONGODB
+Sử dụng thư viện mongoose: https://github.com/Automattic/mongoose như một db driver cho cấu hình db chặt chẽ hơn (vì expressjs nó có hỗ trợ luôn thư viện tương tác với mongodb)
+
+Có thể lấy param trên url bằng req.params.tên_slug với tên_slug là cái bạn đặt ở routing vd home/:slug 
