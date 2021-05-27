@@ -14,6 +14,11 @@ const port = 3000;
 // Tiến hành kết nối với db
 db.connect();
 
+// Dùng để lấy data từ form về (post)
+app.use(express.urlencoded())
+
+
+
 // Khi có các request static file, vào thư mục này để GET
 app.use(express.static(path.join(__dirname, '/public')));
 

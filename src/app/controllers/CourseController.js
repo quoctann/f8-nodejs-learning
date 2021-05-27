@@ -1,7 +1,7 @@
 // Import model vào
-const Course = require('../models/Course')
-const { mongooseToObject } = require('../../util/mongoose')
-class SiteControllers {
+const Course = require('../models/Course');
+const { mongooseToObject } = require('../../util/mongoose');
+class CourseControllers {
     
     // [GET] /courses/:slug
     show(req, res, next) {
@@ -9,8 +9,25 @@ class SiteControllers {
             .then(course =>
                 res.render('courses/course', { course: mongooseToObject(course) })
             )
-            .catch(next)
-    }
+            .catch(next);
+    };
+
+    // [GET] /courses/create
+    create(req, res, next) {
+        res.render('courses/create');
+    };
+
+    // [POST] /courses/store
+    store(req, res, next) {
+        const formData = req.body;
+        formData.image = `https://img.youtube.com/vi/${req.body.videoId}/sddefault.jpg`;
+        const course = new Course(formData);
+        course.save()
+            .then(() => res.redirect('/'))
+            .catch(error => {
+                console.log(error);
+            })
+    };
 }
 
-module.exports = new SiteControllers();
+module.exports = new CourseControllers();
