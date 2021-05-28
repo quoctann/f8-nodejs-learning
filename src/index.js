@@ -3,6 +3,7 @@ const path = require('path');
 const express = require('express');
 const morgan = require('morgan');
 const handlebars = require('express-handlebars');
+const methodOverride = require('method-override')
 const app = express();
 // Cấu hình các đường đi (routes) bằng tập tin này
 const route = require('./routes/index');
@@ -15,9 +16,10 @@ const port = 3000;
 db.connect();
 
 // Dùng để lấy data từ form về (post)
-app.use(express.urlencoded())
+app.use(express.urlencoded());
 
-
+// Thư viện dùng để xử lý method khác GET POST, override with POST having ?_method=DELETE
+app.use(methodOverride('_method'))
 
 // Khi có các request static file, vào thư mục này để GET
 app.use(express.static(path.join(__dirname, '/public')));
@@ -30,6 +32,9 @@ app.engine(
     'hbs',
     handlebars({
         extname: '.hbs',
+        helpers: {
+            sum: (a, b) => a + b,
+        },
     }),
 );
 app.set('view engine', 'hbs');

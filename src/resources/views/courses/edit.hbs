@@ -1,0 +1,18 @@
+<div class="mt-4">
+    <h3>CẬP NHẬT KHÓA HỌC</h3>
+    <form method="POST" action="/courses/{{ course._id }}?_method=PUT" class="mt-4">
+        <div class="mb-3">
+            <label for="name" class="form-label">Tên khóa học</label>
+            <input value="{{ course.name }}" type="text" class="form-control" id="name" name="name">
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">Mô tả</label>
+            <textarea class="form-control" id="description" name="description">{{ course.description }}</textarea>
+        </div>
+        <div class="mb-3">
+            <label for="videoId" class="form-label">Video ID</label>
+            <input value="{{ course.videoId }}" type="text" class="form-control" id="videoId" name="videoId">
+        </div>
+        <button type="submit" class="btn btn-success">Lưu lại</button>
+    </form>
+</div>

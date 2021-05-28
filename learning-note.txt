@@ -97,3 +97,13 @@ MONGODB
 Sử dụng thư viện mongoose: https://github.com/Automattic/mongoose như một db driver cho cấu hình db chặt chẽ hơn (vì expressjs nó có hỗ trợ luôn thư viện tương tác với mongodb)
 
 Có thể lấy param trên url bằng req.params.tên_slug với tên_slug là cái bạn đặt ở routing vd home/:slug 
+
+Ý nghĩa một số phương thức:
+GET gửi request lên server yêu cầu tài nguyên
+POST gửi request lên server để tạo mới một dữ liệu nào đấy
+PUT, PATCH: gửi req để cập nhật dữ liệu, put sẽ replace document, patch sửa từng field
+OPTION, HEAD
+
+$ npm install method-override
+http://expressjs.com/en/resources/middleware/method-override.html
+Thư viện này dùng để nhận một request POST từ form và chuyển nó thành PUT (do công nghệ hiện tại chưa đáp ứng được, điều này tuân thủ RESTFUL API)
