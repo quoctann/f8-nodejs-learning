@@ -101,7 +101,7 @@ Có thể lấy param trên url bằng req.params.tên_slug với tên_slug là 
 Ý nghĩa một số phương thức:
 GET gửi request lên server yêu cầu tài nguyên
 POST gửi request lên server để tạo mới một dữ liệu nào đấy
-PUT, PATCH: gửi req để cập nhật dữ liệu, put sẽ replace document, patch sửa từng field
+PUT, PATCH: gửi req để cập nhật dữ liệu, put sẽ replace document, patch sửa từng field (sử dụng tùy hoàn cảnh)
 OPTION, HEAD
 
 $ npm install method-override

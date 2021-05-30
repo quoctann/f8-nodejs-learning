@@ -16,7 +16,7 @@ const port = 3000;
 db.connect();
 
 // Dùng để lấy data từ form về (post)
-app.use(express.urlencoded());
+app.use(express.urlencoded({ extended: true }))
 
 // Thư viện dùng để xử lý method khác GET POST, override with POST having ?_method=DELETE
 app.use(methodOverride('_method'))
