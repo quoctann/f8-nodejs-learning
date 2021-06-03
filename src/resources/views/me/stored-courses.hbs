@@ -19,12 +19,18 @@
     </div>
     <table class='table table-striped mt-4'>
         <thead>
-            <tr class='table-dark'>
+            <tr class='table-info'>
                 <th scope='col'>#</th>
                 <th scope='col'>STT</th>
-                <th scope='col'>Tên khóa học</th>
+                <th scope='col'>
+                    Tên khóa học
+                    {{{ sortable 'name' _sort }}}
+                </th>
                 <th scope='col'>Video</th>
-                <th scope='col' colspan='2'>Ngày tạo</th>
+                <th scope='col' colspan='2'>
+                    Ngày tạo
+                    {{{ sortable 'createdAt' _sort }}}
+                </th>
             </tr>
         </thead>
         <tbody>

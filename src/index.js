@@ -12,6 +12,12 @@ const db = require('./config/db');
 // Biến khai báo port
 const port = 3000;
 
+const SortMiddleware = require('./app/middlewares/SortMiddleware');
+
+// Custom middlewares
+app.use(SortMiddleware);
+
+
 // Tiến hành kết nối với db
 db.connect();
 
@@ -34,6 +40,26 @@ app.engine(
         extname: '.hbs',
         helpers: {
             sum: (a, b) => a + b,
+            sortable: (field, sort) => {
+                const sortType = field === sort.column ? sort.type : 'default';
+
+                const icons = {
+                    default: 'sort',
+                    asc: 'sort-alpha-down-alt',
+                    desc: 'sort-alpha-down',
+                };
+
+                const types = {
+                    default: 'desc',
+                    asc: 'desc',
+                    desc: 'asc',
+                };
+
+                const icon = icons[sortType];
+                const type = types[sortType];
+
+                return `<a href="?_sort&column=${field}&type=${type}"><i class='fas fa-${icon} me-2'></i></a>`;
+            },
         },
     }),
 );

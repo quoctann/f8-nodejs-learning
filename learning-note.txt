@@ -107,3 +107,43 @@ OPTION, HEAD
 $ npm install method-override
 http://expressjs.com/en/resources/middleware/method-override.html
 Thư viện này dùng để nhận một request POST từ form và chuyển nó thành PUT (do công nghệ hiện tại chưa đáp ứng được, điều này tuân thủ RESTFUL API)
+
+MIDDLEWARE
+Khái niệm chung, có vai trò trung gian (giống như bảo vệ) dùng để validate dữ liệu từ client lên server và ngược lại.
+Chức năng:
+1. Kiểm soát/validation
+2. Không cho vào
+3. validation passed -> cho vào
+4. Chỉnh sửa, thay đổi dữ liệu
+
+> next() sẽ chuyển phần xử lý đến middleware tiếp theo, theo trình tự từ trên xuống
+> expressjs các function sau cái path được hiểu là các middleware như nhau
+> middleware của path này không ảnh hưởng đến các path khác (app.get app.post ...)
+> Tất cả các app.use là một middleware áp dụng được global (toàn project)
+
+VD
+app.get('/',
+    // Middleware 1
+    function(req, res, next) {
+        if(['something', 'sometimes'].include(req.query.somekey)) {
+            req.text = 'lorem islum dolo sit amet';
+            return next();
+        }
+        res.status(403).json({
+            message: 'Access denied',
+        });
+    },
+    // Middleware 2
+    function(req, res, next) {
+        res.json({
+            message: 'Success',
+            text: req.text,
+        });
+    },
+    // Middleware 3
+    function(req, res, next) {
+        somecode
+    },
+)
+
+res.locals.something sẽ lưu biến tạm thời sử dụng trong request đó (xem docs api res.locals), ở ngoài view ta có thể sử dụng {{ something }} để truy xuất đến đối tượng này.
