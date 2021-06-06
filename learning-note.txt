@@ -147,3 +147,5 @@ app.get('/',
 )
 
 res.locals.something sẽ lưu biến tạm thời sử dụng trong request đó (xem docs api res.locals), ở ngoài view ta có thể sử dụng {{ something }} để truy xuất đến đối tượng này.
+
+Xử lý nhiều request tạo bản ghi cùng lúc (khả năng cao bị trùng id): upsert mongodb, loop trong vòng lặp vô hạn cho tới khi nào xử lý xong request (còn lỗi id trùng còn xử lý)
